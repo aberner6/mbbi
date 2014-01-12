@@ -14,26 +14,28 @@ class Line {
   float somethingX;
   float somethingY;
 
-  int radius;
-  float hoursRadius;
+  float lineLength;
   float hourly;
-
-  boolean hover = false;
 
   Line() {
   }
 
 
   void update() {
-    pos.x = lerp(pos.x, tpos.x, .2);//0.1);
-    pos.y = lerp(pos.y, tpos.y, .2);//0.1);
+    pos.x = lerp(pos.x, tpos.x, .01);//0.1);
+    pos.y = lerp(pos.y, tpos.y, .01);//0.1);
+    float lineLength;
+    float hourly;
   }
 
 
   void render() {
     pushMatrix();
     translate(cx, cy);
-    ellipse(pos.x, pos.y, 10, 10);
+    rotate(hourly);
+    point(pos.x, pos.y);
+
+//    ellipse(pos.x, pos.y, lineLength, lineLength);
     popMatrix();
   }
 }

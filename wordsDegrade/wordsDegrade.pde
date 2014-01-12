@@ -14,7 +14,7 @@ int[] lineCount = new int [numincsv];
 int cx, cy;
 
 //boolean h0, h1, h2, h3 =false;
-boolean h = false;
+boolean h,d = false;
 
 int thiswidth= 500; //(1440 x 900)
 int thisheight = 500; //1920 x 1080
@@ -113,6 +113,9 @@ void draw() {
   if (h){
    show(); 
   }
+  if (d){
+   degrade(); 
+  }
 }
 
 void show() {
@@ -126,12 +129,39 @@ void show() {
       lines[i].cy = height/2;
 
       float lineLength = map(lines[i].wordCount, 0, 20, 5, 10);
-      lines[i].tpos.x = 7+lineLength;
+      lines[i].lineLength = lineLength;
+      lines[i].tpos.x = 10;
+//      lines[i].tpos.x = 5*i;
       lines[i].tpos.y = 10;
+      
+    float turnBy = map (i, 1, lines.length, 0, TWO_PI)-HALF_PI; //hours+norm(articles[i].minutes, 0, 60)
+    lines[i].hourly =turnBy;
+    }
+  }
+}
+void degrade() {
+  println ("show");
+  for (int i = 1; i< lines.length; i++) {
+    if (lines[i] != null) {
+
+  println ("not null");
+  
+      lines[i].cx = width/2; 
+      lines[i].cy = height/2;
+
+      float lineLength = map(lines[i].wordCount, 0, 20, 5, 10);
+      lines[i].lineLength = lineLength;
+      lines[i].tpos.x = random(20,(frameCount/10));
+      lines[i].tpos.y = 10;
+      
+    float turnBy = map (i, 1, lines.length, 0, TWO_PI)-HALF_PI; //hours+norm(articles[i].minutes, 0, 60)
+    lines[i].hourly =turnBy;
     }
   }
 }
 
 void keyPressed(){
  if (key=='h') h = !h; 
+ if (key=='d') d = !d; 
+
 }
