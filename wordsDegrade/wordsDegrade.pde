@@ -1,3 +1,12 @@
+//key presses give different views. press h for initial view, 
+//then d to simulate trying to control that circle with your brain concentration
+//then h again to "bring it all in"
+//void keyPressed(){
+// if (key=='h') h = !h; 
+// if (key=='d') d = !d; 
+//
+//}
+
 int numincsv = 24;
 PFont font;
 PFont font2;
