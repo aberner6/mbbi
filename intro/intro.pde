@@ -17,7 +17,7 @@ void setup() {
 } 
 
 void draw() {
-  background(300);
+  background(100);
 //frameRate(10);
   // Set the left and top margin
   int margin = 10;
@@ -64,6 +64,6 @@ void calmDown(){
 //}
 noFill();  
 
-    ellipse(width/2, height/2, frameCount/160, frameCount/160);
+//    ellipse(width/2, height/2, frameCount/160, frameCount/160);
 //  }
 }

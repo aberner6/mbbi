@@ -4,6 +4,7 @@ class Mover {
 
   // The Mover tracks location, velocity, and acceleration 
   PVector location;
+  PVector tlocation = new PVector();
   PVector velocity;
   PVector acceleration;
   PVector mouse;
@@ -47,10 +48,12 @@ class Mover {
    if (frameCount>200&&frameCount<4000){
 //     topspeed =  .1;
 //    velocity.limit(topspeed);
-     location.x = width/2;
+     location.x = lerp(location.x, width/2, .01);
 //     location.y = height/2;
-     location.y = random(height/2+50, height/2-200);
-
+//     location.y = random(height/2+50, height/2-200);
+//    radius.x = lerp(50,100,.2);
+//    radius.y = lerp(50,100,.2);
+//    location.y = radius.y;
      other = 1;   
    }
     // Location changes by velocity
