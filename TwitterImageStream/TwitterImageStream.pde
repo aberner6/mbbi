@@ -7,7 +7,7 @@ static String AccessToken = "372054045-7KAICklwZmhsjx6jj7Is7VSIYhXA6Xbu4VxU1JSm"
 static String AccessTokenSecret = "h22GG2h0PI0eVaxdIzIl5xLr8659BxzZtmxpXHmXjyKww";
 
 // if you enter keywords here it will filter, otherwise it will sample
-String keywords[] = {
+String keywords[] = {"mind"
 };
 
 TwitterStream twitter = new TwitterStreamFactory().getInstance();

@@ -29,6 +29,8 @@ PImage img;
 float x = 800;
 int offsetX;
 
+int currentFrame=0;
+
 void setup() {
   size(1000, 400);
   colorMode(HSB, 360, 100, 100, 100);
@@ -36,10 +38,10 @@ void setup() {
   smooth();
   font = createFont("GeosansLight", 24);
   textFont(font);
-  frameRate(30);
+  frameRate(10);
   smooth();
   noStroke();
-  textAlign(CENTER, CENTER);
+//  textAlign(CENTER, CENTER);
 
   connectTwitter();
  twitter.addListener(listener);
@@ -59,19 +61,19 @@ void draw() {
 //  }
       fill(360);
 
-  if (index>0) {
+  if (index>3) {
 
-    for (int i = 1; i<index; i++) {
+    for (int i = 1; i<index%5; i++) {
 
       text(txt[index], x+offsetX, y); //y=index+20
-
+      currentFrame = frameCount;
       offsetX += textWidth(txt[index]);
     }
-  image(img, -30, 0, 220, height);
-  pushMatrix();
-  rotate( PI);
-  image(img, -width-30, -height, 220, height);
-  popMatrix();
+//  image(img, -30, 0, 220, height);
+//  pushMatrix();
+//  rotate( PI);
+//  image(img, -width-30, -height, 220, height);
+//  popMatrix();
   x-=5;
     if (x<-offsetX-10) x = width+10;
     offsetX = 0;
@@ -93,15 +95,11 @@ private static AccessToken loadAccessToken() {
 StatusListener listener = new StatusListener() {
   public void onStatus(Status status) {
     for (int i = 1; i<txt.length; i++) {
-      //      other[i] = status.getText();
-      //      if (other[i].equals(other[i-1])) {
-      //      }
-      //      else {
-      //        txt[i]= other[i];
-      //      }
       txt[i]= status.getText();
     }
+    delay();
     index++;
+
     println(status.getText());
   }
 

@@ -9,7 +9,7 @@ static String AccessTokenSecret = "h22GG2h0PI0eVaxdIzIl5xLr8659BxzZtmxpXHmXjyKww
 
 //Filter these keywords
 String keywords[] = {
-  "behave"
+  "brain"
 };
 String[]txt = new String[3000];
 
