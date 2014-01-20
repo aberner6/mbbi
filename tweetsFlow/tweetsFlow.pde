@@ -44,6 +44,7 @@ int initialShowing = 1;
 int indexN = 1;
 int numFrames = 12;  // The number of frames in the animation
 float maxTweetLength = 0;
+float minTweetLength = 2000;
 
 void setup() {
   size(thiswidth, thisheight); //size(1500, 750); //100
@@ -81,7 +82,7 @@ void parse(String[]dates) {
 void draw() {
   background(0, 0, 20, 10);
 
-//  frameRate(5);
+  //  frameRate(5);
   for (int i = 1; i< lines.length; i++) {
     if (lines[i] != null) {
       lines[i].update();
@@ -99,8 +100,8 @@ void draw() {
   if (h) {
     show();
   }
-  if (!h){
-println ("h is false");    
+  if (!h) {
+    println ("h is false");    
     x = 0;
     numShowing = 2;
     n = false;
@@ -110,16 +111,17 @@ println ("h is false");
 void show() {
   println ("show");
   maxTweetLength = 0;
+  minTweetLength = 2000;
   if (n && initialShowing<55 && numShowing<60) {
     x = 0;
     // initialShowing = initialShowing+5;
     numShowing = numShowing+5;
     n = false;
   }
-//  else if (initialShowing>55 || numShowing < 60) {
-//    initialShowing = 1;
-//    numShowing = 5;
-//  }
+  //  else if (initialShowing>55 || numShowing < 60) {
+  //    initialShowing = 1;
+  //    numShowing = 5;
+  //  }
   for (int i = initialShowing; i< numShowing; i++) {
     if (lines[i] != null) {
 
@@ -134,10 +136,13 @@ void show() {
       if (textWidth(lines[index].tweets)>maxTweetLength) {
         maxTweetLength = textWidth(lines[index].tweets);
       }
+      if (textWidth(lines[index].tweets)<minTweetLength) {
+        minTweetLength = textWidth(lines[index].tweets);
+      }
       println (maxTweetLength);
       lines[i].tpos.x = x+offsetX;
       lines[i].tpos.y = 0;
-      float lerpIt = map (textWidth(lines[index].tweets), 0, maxTweetLength, .000001, .0000001);
+      float lerpIt = map (textWidth(lines[index].tweets), minTweetLength, maxTweetLength, .0001, .00001);
 
       lines[i].lerpVal=  lerpIt;//.00001*offsetX;
       x-=1;
