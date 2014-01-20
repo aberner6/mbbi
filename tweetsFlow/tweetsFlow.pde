@@ -23,9 +23,9 @@ String[] tweets = new String [numincsv];
 int cx, cy;
 
 //boolean h0, h1, h2, h3 =false;
-boolean h, d = false;
+boolean h, d, n = false;
 
-int thiswidth= 500; //(1440 x 900)
+int thiswidth= 1200; //(1440 x 900)
 int thisheight = 500; //1920 x 1080
 float yspace=thisheight/5.1;
 float xspace = thiswidth/8; 
@@ -38,6 +38,12 @@ float x = 800;
 int offsetX;
 //float lerpVal=0;
 //float valLerp;
+
+int numShowing = 5;
+int initialShowing = 1;
+int indexN = 1;
+int numFrames = 12;  // The number of frames in the animation
+float maxTweetLength = 0;
 
 void setup() {
   size(thiswidth, thisheight); //size(1500, 750); //100
@@ -75,54 +81,90 @@ void parse(String[]dates) {
 void draw() {
   background(0, 0, 20, 10);
 
-  frameRate(10);
+//  frameRate(5);
   for (int i = 1; i< lines.length; i++) {
     if (lines[i] != null) {
       lines[i].update();
       lines[i].render();
     }
   }
+  //  initialShowing = numShowing - 3;
+  //  numShowing = numShowing + 5;
+  //  if (initialShowing > 60) { 
+  //    initialShowing = 1;
+  //  }
+  //  if (numShowing > 60) { 
+  //    numShowing = 5;
+  //  }
   if (h) {
     show();
   }
-  //  if (d) {
-  //    degrade();
-  //  }
+  if (!h){
+println ("h is false");    
+    x = 0;
+    numShowing = 2;
+    n = false;
+  }
 }
 
 void show() {
   println ("show");
-  for (int i = 1; i< 5; i++) {
+  maxTweetLength = 0;
+  if (n && initialShowing<55 && numShowing<60) {
+    x = 0;
+    // initialShowing = initialShowing+5;
+    numShowing = numShowing+5;
+    n = false;
+  }
+//  else if (initialShowing>55 || numShowing < 60) {
+//    initialShowing = 1;
+//    numShowing = 5;
+//  }
+  for (int i = initialShowing; i< numShowing; i++) {
     if (lines[i] != null) {
 
-      println ("not null");
+      //      println ("not null");
       int index = i;
       lines[i].cx = 0; 
-      //      lines[i].cy = height/2;
-      float y = map (i, 0, 5, 20, height);
+      float y = map (i, initialShowing, numShowing, 40, height-20);
       lines[i].cy = y;
-      
+
       lines[i].tweets = lines[i].tweets;
       offsetX += textWidth(lines[index].tweets);
+      if (textWidth(lines[index].tweets)>maxTweetLength) {
+        maxTweetLength = textWidth(lines[index].tweets);
+      }
+      println (maxTweetLength);
       lines[i].tpos.x = x+offsetX;
       lines[i].tpos.y = 0;
-      
-//  float lerping = 0;
-//  float valLerp = map(lerping, .004, .1, 0, offsetX);
-      lines[i].lerpVal= .00001*offsetX;
-//      lines[i].lerpVal = .004;
+      float lerpIt = map (textWidth(lines[index].tweets), 0, maxTweetLength, .000001, .0000001);
+
+      lines[i].lerpVal=  lerpIt;//.00001*offsetX;
       x-=1;
       if (x<-offsetX-10) x = width+10;
-      offsetX = 0;
+      //      offsetX = 0;
     }
   }
 }
 
+//void newTweets(){
+// numShowing =  numShowing+5;
+// initialShowing = initialShowing+5;
+//// show();
+//}
+
 void keyPressed() {
   if (key=='h') h = !h; 
   if (key=='d') d = !d;
+  if (key=='n') n = !n;
 }
 
+void mousePressed() {
+  initialShowing = 5;
+  numShowing = 10;
+  x = 0;
+  show();
+}
 
 
 

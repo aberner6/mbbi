@@ -1,5 +1,5 @@
 class Tweet {
-  Date timeStamp;
+//  Date timeStamp;
   String section;
   String datey;
   //String timeStamp;
@@ -51,7 +51,7 @@ String neuro;
   Tweet() {
     //    headline = "";
     wordCount = 0;  
-    timeStamp = new Date();
+//    timeStamp = new Date();
   }
 
   void prep() {

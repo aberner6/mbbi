@@ -37,11 +37,11 @@ String[] sectiond;
 
 int maxW;
 
-SimpleDateFormat sdf;
-SimpleDateFormat format;
-SimpleDateFormat hours_of_date;
-SimpleDateFormat minutes_of_date;
-SimpleDateFormat day_of_date;
+//SimpleDateFormat sdf;
+//SimpleDateFormat format;
+//SimpleDateFormat hours_of_date;
+//SimpleDateFormat minutes_of_date;
+//SimpleDateFormat day_of_date;
 
 int maxWords, minWords;
 String headie;
@@ -78,7 +78,7 @@ int tick = 23;
 float tickit;
 
 ///////////////////////////////////////////////////////////////////////
-Date[]timeArray = new Date[numincsv];
+//Date[]timeArray = new Date[numincsv];
 long[]diffArray = new long[numincsv];
 long[]diffinArray = new long[numincsv];
 int numcircles = 35;
@@ -115,11 +115,11 @@ void setup() {
   // textFont(font2, fontSize);
   //  header = new Header();
 
-  sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
-  hours_of_date = new SimpleDateFormat("HH");
-  minutes_of_date= new SimpleDateFormat("mm");
-  day_of_date = new SimpleDateFormat ("dd");
-  format = new SimpleDateFormat("MM/dd/yyyy");
+//  sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+//  hours_of_date = new SimpleDateFormat("HH");
+//  minutes_of_date= new SimpleDateFormat("mm");
+//  day_of_date = new SimpleDateFormat ("dd");
+//  format = new SimpleDateFormat("MM/dd/yyyy");
   tweets = new Tweet[numincsv]; //have to declare length?DO I HAVE TOOOOOOOOOOOOOOOOOO
   String[] dates = loadStrings ("allresponses.csv");
   parse(dates);
