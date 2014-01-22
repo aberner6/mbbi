@@ -9,9 +9,7 @@
 
 int numincsv = 61;
 PFont font;
-PFont font2;
 int fontSize = 12;
-int fontSize2 = 18;
 
 String pieces;
 String apes;
@@ -19,33 +17,25 @@ String[] sectiond;
 
 Line [] lines;
 
-String[] tweets = new String [numincsv];
 int cx, cy;
 
-//boolean h0, h1, h2, h3 =false;
-boolean h, d, n = false;
+//s is show
+//n is new screen
+//b is screen go back up
+
+boolean d, n, u = false;
 
 int thiswidth= 1200; //(1440 x 900)
 int thisheight = 500; //1920 x 1080
-float yspace=thisheight/5.1;
-float xspace = thiswidth/8; 
-int radiv = 6;
-int marginl = radiv*35;
-int margint=radiv*18;
 
 PImage img;
-float x = 800;
-int offsetX;
-//float lerpVal=0;
-//float valLerp;
 
-int numShowing = 5;
+int numShowing = 2;
 int initialShowing = 1;
-int indexN = 1;
-int numFrames = 12;  // The number of frames in the animation
-float maxTweetLength = 0;
-float minTweetLength = 2000;
 
+int screenWidth = 40;
+int screenHeight = 100;
+int whichScreen;
 void setup() {
   size(thiswidth, thisheight); //size(1500, 750); //100
 
@@ -54,14 +44,14 @@ void setup() {
 
   smooth();
   font= loadFont("BrainFlower-12.vlw");
-  font2 = loadFont("BrainFlower-18.vlw");
-  textFont(font2, fontSize2);
+  //  font2 = loadFont("BrainFlower-18.vlw");
+  textFont(font, fontSize);
 
   lines = new Line[numincsv]; //have to declare length?DO I HAVE TOOOOOOOOOOOOOOOOOO
   String[] dates = loadStrings ("tweets.csv");
   parse(dates);
-    img = loadImage("brainimg.png");  // Load the image into the program  
-imageMode(CENTER);
+  img = loadImage("brainimg.png");  // Load the image into the program  
+  imageMode(CENTER);
 }
 void parse(String[]dates) {
   for (int i = 1; i<lines.length; i++) {
@@ -69,7 +59,7 @@ void parse(String[]dates) {
     try {
       if (pieces.length >= 0) {
         Line line = new Line();
-        line.tweets = (pieces[0]);
+        //        line.tweets = (pieces[0]);
         lines[i]=line;
       }
     }
@@ -83,100 +73,62 @@ void parse(String[]dates) {
 
 void draw() {
   background(360);
-  
-    image(img, width/2, height/2-72, img.width/2, img.height/2);
 
-  //  frameRate(5);
+  image(img, width/2, height/2-72, img.width/2, img.height/2);
+
   for (int i = 1; i< lines.length; i++) {
     if (lines[i] != null) {
       lines[i].update();
       lines[i].render();
     }
   }
-  //  initialShowing = numShowing - 3;
-  //  numShowing = numShowing + 5;
-  //  if (initialShowing > 60) { 
-  //    initialShowing = 1;
-  //  }
-  //  if (numShowing > 60) { 
-  //    numShowing = 5;
-  //  }
-  if (h) {
-    show();
+  if (d) {
+    floatDown();
   }
-  if (!h) {
-    println ("h is false");    
-    x = 0;
-    numShowing = 2;
-    n = false;
+  if (u) {
+    floatUp();
   }
 }
 
-void show() {
-  println ("show");
-  maxTweetLength = 0;
-  minTweetLength = 2000;
-  if (n && initialShowing<55 && numShowing<60) {
-    x = 0;
-    // initialShowing = initialShowing+5;
-    numShowing = numShowing+5;
+void floatDown() {
+  if (n && numShowing<12 && initialShowing<12) {
+    numShowing += random(1, 3);
+    initialShowing +=1;
+    whichScreen = parseInt(random(initialShowing, numShowing));
     n = false;
   }
-  //  else if (initialShowing>55 || numShowing < 60) {
-  //    initialShowing = 1;
-  //    numShowing = 5;
-  //  }
   for (int i = initialShowing; i< numShowing; i++) {
     if (lines[i] != null) {
+      float screenX = map(i, 1, 11, width/2-img.width/4, width/2+img.width/4); 
+      lines[i].cx = screenX+screenWidth;
 
-      //      println ("not null");
-      int index = i;
-      lines[numShowing].cx = (width/2-img.width/2)+numShowing*40; 
       lines[i].cy = 0; 
-
-//      float y = map (i, initialShowing, numShowing, 40, height-20);
-//      lines[i].cy = y;
-
-//      lines[i].tweets = lines[i].tweets;
-//      offsetX += textWidth(lines[index].tweets);
-//      if (textWidth(lines[index].tweets)>maxTweetLength) {
-//        maxTweetLength = textWidth(lines[index].tweets);
-//      }
-//      if (textWidth(lines[index].tweets)<minTweetLength) {
-//        minTweetLength = textWidth(lines[index].tweets);
-//      }
-//      println (maxTweetLength);
-//      lines[i].pos.x = width/2;
       lines[i].tpos.x = 0;
-//      lines[i].pos.y = 0;
-      lines[i].tpos.y = height-100;
-//      float lerpIt = map (textWidth(lines[index].tweets), minTweetLength, maxTweetLength, .0000009, .0000003);
+      lines[i].tpos.y = height-screenHeight;
 
-      lines[i].lerpVal= .03;//.00001*offsetX;
-//      x-=1;
-//      if (x<-offsetX-10) x = width+10;
-      //      offsetX = 0;
+      lines[i].lerpVal= .03;
+    }
+  }
+}
+void floatUp() {
+  for (int i = initialShowing; i< numShowing; i++) {
+    if (lines[i] != null && numShowing>9) {
+      if (u){
+      lines[6].tpos.y = height/2;
+      lines[7].tpos.y = height/3;
+      }
+      else {
+      lines[6].tpos.y = height-screenHeight;
+      lines[7].tpos.y = height-screenHeight;
+      }
     }
   }
 }
 
-//void newTweets(){
-// numShowing =  numShowing+5;
-// initialShowing = initialShowing+5;
-//// show();
-//}
-
 void keyPressed() {
-  if (key=='h') h = !h; 
-  if (key=='d') d = !d;
+  if (key=='d') d = !d; 
+  if (key=='u') u = !u;
   if (key=='n') n = !n;
-}
-
-void mousePressed() {
-  initialShowing = 5;
-  numShowing = 10;
-  x = 0;
-  show();
 }
 
 

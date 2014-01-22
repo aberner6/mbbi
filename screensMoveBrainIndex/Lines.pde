@@ -1,7 +1,9 @@
 class Line {
   String tweets;
   float lerpVal = 0;
-
+  int screenWidth = 40;
+  int screenHeight = 100;
+  
   PVector pos = new PVector();
   PVector tpos = new PVector();
 
@@ -23,7 +25,7 @@ class Line {
   void render() {
     pushMatrix();
     translate(cx, cy);
-    rect(pos.x, pos.y, 40, 100);
+    rect(pos.x, pos.y, screenWidth, screenHeight);
 //    text(tweets, pos.x, pos.y);
     popMatrix();
   }
