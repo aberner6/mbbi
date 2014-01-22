@@ -23,7 +23,7 @@ int cx, cy;
 //n is new screen
 //b is screen go back up
 
-boolean d, n, u = false;
+boolean d, n, u, p = false;
 
 int thiswidth= 1200; //(1440 x 900)
 int thisheight = 500; //1920 x 1080
@@ -37,7 +37,7 @@ int screenWidth = 40;
 int screenHeight = 100;
 int whichScreen;
 void setup() {
-  size(thiswidth, thisheight); //size(1500, 750); //100
+  size(thiswidth-120, thisheight+screenHeight); //size(1500, 750); //100
 
   colorMode(HSB, 360, 100, 100);
   fill (300);
@@ -74,7 +74,7 @@ void parse(String[]dates) {
 void draw() {
   background(360);
 
-  image(img, width/2, height/2-72, img.width/2, img.height/2);
+  image(img, width/2, height/2-screenHeight, img.width*2/3, img.height*2/3);
 
   for (int i = 1; i< lines.length; i++) {
     if (lines[i] != null) {
@@ -85,11 +85,33 @@ void draw() {
   if (d) {
     floatDown();
   }
+  if (p) {
+    floatPrep();
+  }
   if (u) {
     floatUp();
   }
 }
+void floatPrep() {
+  if (n && numShowing<12 && initialShowing<12) {
+    numShowing += random(1, 3);
+    initialShowing +=1;
+    whichScreen = parseInt(random(initialShowing, numShowing));
+    n = false;
+  }
+  for (int i = initialShowing; i< numShowing; i++) {
+    if (lines[i] != null) {
+      float screenX = map(i, 1, 11, width/2-img.width/2, width/2+img.width/2); 
+      lines[i].cx = screenX+screenWidth;
 
+      lines[i].cy = 0; 
+      lines[i].tpos.x = 0;
+      lines[i].tpos.y = 0;
+
+      lines[i].lerpVal= .03;
+    }
+  }
+}
 void floatDown() {
   if (n && numShowing<12 && initialShowing<12) {
     numShowing += random(1, 3);
@@ -102,9 +124,9 @@ void floatDown() {
       float screenX = map(i, 1, 11, width/2-img.width/4, width/2+img.width/4); 
       lines[i].cx = screenX+screenWidth;
 
-      lines[i].cy = 0; 
+      lines[i].cy = screenHeight; 
       lines[i].tpos.x = 0;
-      lines[i].tpos.y = height-screenHeight;
+      lines[i].tpos.y = height-screenHeight*2;
 
       lines[i].lerpVal= .03;
     }
@@ -129,6 +151,7 @@ void keyPressed() {
   if (key=='d') d = !d; 
   if (key=='u') u = !u;
   if (key=='n') n = !n;
+    if (key=='p') p = !p;
 }
 
 
