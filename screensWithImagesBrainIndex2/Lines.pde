@@ -25,7 +25,7 @@ class Line {
   void render() {
     pushMatrix();
     translate(cx, cy);
-   image(img, pos.x, pos.y, screenWidth, screenHeight);
+   image(img2, pos.x, pos.y, screenWidth, screenHeight);
 //    rect(pos.x, pos.y, screenWidth, screenHeight);
 //    text(tweets, pos.x, pos.y);
     popMatrix();
