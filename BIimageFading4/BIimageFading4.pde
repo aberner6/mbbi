@@ -11,7 +11,10 @@ int duration = 4000; // Dauer des Fades in Millisekunden
 PImage images[];
 PImage newImages[];
 int index;
-
+PImage background;
+PImage firstBackground;
+float leftSide;
+float rightSide;
 
 PFont font;
 int fontSize = 12;
@@ -26,27 +29,23 @@ boolean prep, floatMedium = false;
 int thiswidth= 1200; //(1440 x 900)
 int thisheight = 515; //1920 x 1080
 
-PImage background;
-PImage img;
-PImage img2; 
-PImage img3;
-
 int numShowing = 1;
 int initialShowing = 0;
 
 int screenWidth = 60;
 int screenHeight = 140;
 int whichScreen;
-int topMargin = 0;
-int screenCount = 12;
+int topMargin = -10;
+int screenCount = 10;
 int lmargin = 10;
 
 int m = 0;
 int indie = 1;
 
 void setup() {
-  size(thiswidth-115, thisheight+screenHeight); //size(1500, 750); //100
-
+//  size(thiswidth-115, thisheight+screenHeight); //size(1500, 750); //100
+//  size(screenWidth*screenCount, thisheight+screenHeight); //size(1500, 750); //100
+size(thiswidth, thisheight+screenHeight);
   colorMode(HSB, 360, 100, 100);
   fill (300);
 
@@ -60,6 +59,9 @@ void setup() {
   newImages = new PImage[5];
   background = loadImage( "background.jpg" );
 
+//  firstBackground = loadImage( "background.jpg" );
+//  background = firstBackground.get(0,0,screenWidth*screenCount,thisheight);    
+
 //  images[0] = loadImage( "background.jpg" );
   for(int t=1;t<5;t++){
     images[t] = loadImage( "" + t + ".jpg" );
@@ -67,11 +69,6 @@ void setup() {
 newImages[t] = images[t].get(0,0,screenWidth,screenHeight);    
     
   };  
-//background.resize(screenWidth, 0);
-  
-//  img = loadImage("brainimg.png");  // Load the image into the program  
-//  img2 = loadImage("bluegrid.jpg");  // Load the other image into the program  
-//  img3 = loadImage("screen1.png");
 }
 
 void parse() {
@@ -83,7 +80,13 @@ void parse() {
 
 void draw() {
   background(360);
-  image(background, 0, 0, background.width*2/3, background.height*2/3);
+  
+//    size(screenWidth*screenCount, thisheight+screenHeight); //size(1500, 750); //100
+ leftSide = width/2-(screenWidth*screenCount)/2;
+ rightSide =  width/2+(screenWidth*screenCount)/2;
+   image(background, leftSide, 0, screenWidth*screenCount, background.height*2/3);
+
+//  image(background, 0, 0, background.width*2/3, background.height*2/3);
   for (int i = 0; i< screenCount; i++) {
     lines[i].update();
     lines[i].render();
@@ -119,7 +122,7 @@ void draw() {
     floatNine();
   }
   if (eight) {
-    floatTen();
+//    floatTen();
   }
   if (prep) {
     floatPrep();
@@ -131,12 +134,16 @@ void draw() {
 void floatPrep() {
   for (int i = 0; i< screenCount; i++) {
     if (lines[i] != null) {
-      float screenX = map(i, 0, screenCount-1, lmargin, width); 
+//        size(screenWidth*screenCount, thisheight+screenHeight); //size(1500, 750); //100
+
+      float screenX = map(i, 0, screenCount, leftSide, rightSide); 
+     lines[i].opacity.x = 255;  // Apply transparency without changing color
+  lines[i].topacity.x=255;
       lines[i].cx = screenX;
       lines[i].cy = 0; 
       lines[i].tpos.x = 0;
       lines[i].tpos.y = 0;
-      lines[i].opacity = 255;
+//      lines[i].opacity = 255;
     }
   }
 }
@@ -212,14 +219,14 @@ void floatNine() {
     }
   }
 }
-void floatTen() {
-  int whichScreen = 10;
-  for (int i = 0; i< screenCount; i++) {
-    if (lines[i]!=null) {
-      lines[whichScreen].tpos.y = height-screenHeight+topMargin;
-    }
-  }
-}
+//void floatTen() {
+//  int whichScreen = 10;
+//  for (int i = 0; i< screenCount; i++) {
+//    if (lines[i]!=null) {
+//      lines[whichScreen].tpos.y = height-screenHeight+topMargin;
+//    }
+//  }
+//}
 void floatZero() {
   int whichScreen = 0;
   for (int i = 0; i< screenCount; i++) {
@@ -243,7 +250,7 @@ void floatZero() {
 void floatDown() {
   for (int i = 0; i< screenCount; i++) {
     if (lines[i]!=null) {
-      float screenX = map(i, 0, screenCount-1, lmargin, width); 
+      float screenX = map(i, 0, screenCount-1, lmargin, screenWidth*screenCount); 
       lines[i].cx = screenX;
       lines[i].cy = 0; 
       lines[i].pos.x = 0;
@@ -255,11 +262,23 @@ void floatDown() {
   }
 }
 
-void floatMedium() {
-  lines[m].index=indie;
+void floatMedium() {   
+
   lines[m].tpos.y = height/2;
-  fadeTime = millis() + duration;
-  lines[m].opacity=map(fadeTime - millis(), 0, duration, 0, 100);
+  float whereIsIt = lines[m].tpos.y;
+  float whereIsItGoing = map(whereIsIt, 0, height/2, 0, height);
+  println(whereIsIt);
+  if (lines[m].pos.y>height/2-10){
+    
+  int fadeFrom = 0;
+  int fadeTo = 255;
+  lines[m].topacity.x=fadeTo;
+  lines[m].opacity.x = fadeFrom;  // Apply transparency without changing color
+//  lines[i].topacity.x=255;
+  lines[m].index=indie;
+  }; 
+//  fadeTime = millis() + duration;
+//  lines[m].opacity=map(fadeTime - millis(), 0, duration, 0, 100);
 }
 void findWhichScreen() {
   m = parseInt(random (0, 12));
@@ -277,7 +296,7 @@ void keyPressed() {
   if (key=='n') nine = !nine;
   if (key=='t') ten = !ten;
   if (key=='z') zero = !zero;
-  if (m>=12) {
+  if (m>=screenCount) {
     m = 0;
   }
   if (indie>=4) {
