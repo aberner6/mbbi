@@ -14,6 +14,8 @@ class Line {
   PVector opacity = new PVector();
   PVector topacity = new PVector();
   
+  PVector imgPos = new PVector();
+  PVector timgPos = new PVector();
 //  float opacity;
   int index = 1;
   PImage img;
@@ -31,6 +33,9 @@ class Line {
 //    float opacity;
     //    PImage img;
     int index;
+    
+    imgPos.x = lerp(imgPos.x, timgPos.x, lerpVal);
+    imgPos.y = lerp(imgPos.y, timgPos.y, lerpVal);
     //images[index].resize(screenWidth, 0);
   }
 
@@ -42,7 +47,7 @@ class Line {
     println(pos.y+"pos.y");
     tint(255, opacity.x);  // Apply transparency without changing color
     // images[index].resize(screenWidth,0);
-    image( newImages[index], pos.x, pos.y);
+    image(newImages[index], pos.x, pos.y, imgPos.x, imgPos.y);
 
     fill(255, 40);
     rect(pos.x, pos.y, screenWidth, screenHeight);
