@@ -9,14 +9,14 @@ class Line {
 
   float cx;
   float cy;
-  
-  
+
+
   PVector opacity = new PVector();
   PVector topacity = new PVector();
-  
+
   PVector imgPos = new PVector();
   PVector timgPos = new PVector();
-//  float opacity;
+  //  float opacity;
 
   PVector backImgPos = new PVector();
   PVector tbackImgPos = new PVector();
@@ -24,23 +24,23 @@ class Line {
 
   int index = 1;
   PImage img;
-//  PImage background;
+  //  PImage background;
   Line() {
   }
 
 
   void update() {
-
+//    lerpVal;
 
     pos.x = lerp(pos.x, tpos.x, lerpVal);//0.1);
     pos.y = lerp(pos.y, tpos.y, lerpVal);//0.1);
     String tweets;
-    
+
     opacity.x = lerp(opacity.x, topacity.x, lerpVal);
-//    float opacity;
+    //    float opacity;
     //    PImage img;
     int index;
-    
+
     imgPos.x = lerp(imgPos.x, timgPos.x, lerpVal);
     imgPos.y = lerp(imgPos.y, timgPos.y, lerpVal);
 
@@ -54,7 +54,7 @@ class Line {
 
     pushMatrix();
     translate(cx, cy);
-//    println(pos.y+"pos.y");
+    //    println(pos.y+"pos.y");
     tint(255, opacity.x);  // Apply transparency without changing color
 
     image(newImages[index], pos.x, pos.y, imgPos.x, imgPos.y);

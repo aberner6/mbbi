@@ -37,7 +37,7 @@ Line [] lines;
 int cx, cy;
 //int index = 1;
 boolean one, two, three, four, five, six, seven, eight, nine, ten, zero = false;
-boolean prep, floatMedium, flow, erase, wipe = false;
+boolean prep, floatMedium, flow, erase, wipe, particles = false;
 
 int thiswidth= 900; //(1440 x 900)
 int thisheight = 600; //1920 x 1080
@@ -112,11 +112,6 @@ void draw() {
 
   newBackImgPos.y = lerp(newBackImgPos.y, tNewBackImgPos.y, .03);
   newBackImgPos.x = lerp(newBackImgPos.x, tNewBackImgPos.x, .03);
-  if (wipe) {
-    //  tint(255, 100); 
-    //  image(backgroundTwo, leftSide, newBackImgPos.x, screenWidth*screenCount, newBackImgPos.y);
-  }
-  //  tNewBackImgPos.y = lines[i].tpos.y;
 
   leftSide = width/2-(screenWidth*screenCount)/2;
   rightSide =  width/2+(screenWidth*screenCount)/2;
@@ -137,7 +132,6 @@ void draw() {
   }
   if (wipe) {
     wipe();
-    makeParticles();
   }
   if (prep) {
     floatPrep();
@@ -148,6 +142,9 @@ void draw() {
   if (flow) {
     imageFlow();
   }
+  if (particles) {
+    makeParticles();
+  }
 }
 void makeParticles() {
   ps.addParticle();
@@ -155,14 +152,8 @@ void makeParticles() {
 }
 void floatPrep() {
 
-  //whatsY = lerp(background.height*2/3,-background.height*6, .09);
-  //  tbackImgPos.y = height;
-  //  tbackImgPos.x = height/2;
-
-
   for (int i = 0; i< screenCount; i++) {
     if (lines[i] != null) {
-      //        size(screenWidth*screenCount, thisheight+screenHeight); //size(1500, 750); //100
 
       float screenX = map(i, 0, screenCount, leftSide, rightSide); 
       lines[i].opacity.x = 255;  // Apply transparency without changing color
@@ -171,72 +162,34 @@ void floatPrep() {
       lines[i].imgPos.x = screenWidth;
       lines[i].timgPos.x = screenWidth;
       lines[i].timgPos.y = screenHeight;
-      //    PVector imgPos = new PVector();
-      //  PVector timgPos = new PVector();
 
       lines[i].cx = screenX;
       lines[i].cy = 0; 
       lines[i].tpos.y = 0;
 
-      //      lines[i].tpos.y = 100*(i%3); //not 0
       lines[i].tpos.x = 0;
-      //      lines[i].opacity = 255;
     }
   }
 }
 void wipe() {
   for (int i = 0; i< screenCount; i++) {
     lines[i].tpos.y = height-screenHeight+topMargin;
-    //      tbackImgPos.x = lines[i].tpos.y; 
     tbackImgPos.y = 0; 
-
     tNewBackImgPos.y = lines[i].tpos.y;
-    //  image(imgMask, leftSide, height-screenHeight*2, screenWidth*screenCount, screenHeight); //newBackImgPos.y
-    //  float pointillize = map(i, 0, width, 10,100);
-    //  int x = int(random(background.width));
-    //  int y = int(random(background.height));
-    //  color pix = background.get(x, y);
-    //  fill(pix, 100);
-    //  ellipse(x, y, pointillize, pointillize);      
-    //   background.mask(imgMask);
   }
 }
+
 void floatAny(int makeItInt) {
   lines[makeItInt].tpos.y = height-screenHeight+topMargin;
 }
 
 
 
-void floatDown() {
-  for (int i = 0; i< screenCount; i++) {
-    if (lines[i]!=null) {
-      float screenX = map(i, 0, screenCount-1, lmargin, screenWidth*screenCount); 
-      lines[i].cx = screenX;
-      lines[i].cy = 0; 
-      lines[i].pos.x = 0;
-      lines[i].pos.y = 0;
-
-      lines[i].tpos.x = 0;
-      lines[i].tpos.y = height-screenHeight+topMargin;
-    }
-  }
-}
-
 void floatMedium() {   
 
   lines[m].tpos.y = height/2;
   float whereIsIt = lines[m].tpos.y;
   float whereIsItGoing = map(whereIsIt, 0, height/2, 0, height);
-  //  println(whereIsIt);
-  //  lines[m].topacity.x=fadeTo;
-  //  lines[m].opacity.x = fadeTo;  // Apply transparency without changing color
-
-  //  if (lines[m].pos.y>height/2-10) {
-  //    lines[m].index=indie;
-  //    //  lines[m].topacity.x=fadeTo;
-  //    //  lines[m].opacity.x = fadeFrom;  // Apply transparency without changing color
-  //  };
-  //  println (prep);
   if (lines[m].pos.y<height/2+10 && lines[m].pos.y>height/2-10) {
     lines[m].index=indie;
   }
@@ -267,18 +220,61 @@ void findWhichScreen() {
   indie = parseInt(random(1, images.length));
 }
 
+
+
+
+
+//FLOAT RANDOM AND FLOAT ON NEED TO STOP BEFORE THEY GET TO THE GROUND
+
+void floatRandom() { 
+  for (int i = 1; i<lines.length; i++) {
+    lines[i].lerpVal = .01;
+  }
+  lines[3].tpos.y = height;
+  lines[5].tpos.y = 0;
+  lines[6].tpos.y = height;
+  lines[9].tpos.y = 0;
+
+  if (lines[3].pos.y<height/2+10 && lines[3].pos.y>height/2-10) {
+    lines[3].index=indie;
+  }
+  else { 
+    lines[3].index=1;
+  }
+}
+void floatOn() {
+    for (int i = 1; i<lines.length; i++) {
+  lines[i].lerpVal = .01;  
+    }
+  lines[5].tpos.y = height;
+  lines[3].tpos.y = 0;
+  lines[9].tpos.y = height;
+  lines[6].tpos.y = 0;
+
+  if (lines[3].pos.y<height/2+10 && lines[3].pos.y>height/2-10) {
+    lines[3].index=indie;
+  }
+  else { 
+    lines[3].index=1;
+  }
+}
+
+
+
+
 void keyPressed() {
+  println(key+"this key");
+  if (key=='r') floatRandom();
+  if (key=='o') floatOn();
   whichScreen = parseInt(key);
   int makeItInt;
   makeItInt = parseInt(map(whichScreen, 48, 58, 0, 10));
 
   if (makeItInt<11 && makeItInt>=0) {
-
-    println(makeItInt+"inside");
     floatAny(makeItInt);
   }
-  if (key=='t'){
-  floatAny(10);
+  if (key=='t') {
+    floatAny(10);
   }
   if (key=='l') flow = !flow;
   if (key == 'e') erase = !erase;
@@ -295,6 +291,7 @@ void keyPressed() {
     floatMedium = !floatMedium;
   }
   if (key=='p') prep = !prep;
+  if (key=='a') particles = !particles;
 }
 
 
