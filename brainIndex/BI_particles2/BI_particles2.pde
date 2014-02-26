@@ -59,12 +59,11 @@ int imageCount = 5+screenCount;
 float whatsY;
 
 float lerpVal = 0.08;
-float particleSpotX = width/2;
-float particleSpotY = height/2;
+int x = 100;
 
 void setup() {
   size(thiswidth, thisheight+screenHeight);
-  ps = new ParticleSystem(new PVector(width/2, 50));
+  ps = new ParticleSystem(new PVector(width/2, height/2), x);
 
 
   colorMode(HSB, 360, 100, 100, 100);
@@ -147,6 +146,13 @@ void draw() {
   }
 }
 void makeParticles() {
+//  for (int i = 0; i<ps.length; i++){
+//  ps[i].particleX = 10;
+//  ps[i].particleY = 10;
+//  }
+x=200;
+//  ps = new ParticleSystem(new PVector(width/2, height/2), x);
+
   ps.addParticle();
   ps.run();
 }

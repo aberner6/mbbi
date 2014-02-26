@@ -4,14 +4,16 @@
 class ParticleSystem {
   ArrayList<Particle> particles;
   PVector origin;
+  float particleX;
 
-  ParticleSystem(PVector location) {
+  ParticleSystem(PVector location, int x) {
     origin = location.get();
+    x = 200;
     particles = new ArrayList<Particle>();
   }
 
   void addParticle() {
-    particles.add(new Particle(origin));
+    particles.add(new Particle(origin, x));
   }
 
   void run() {
