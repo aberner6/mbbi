@@ -150,7 +150,9 @@ void makeParticles() {
 //  ps[i].particleX = 10;
 //  ps[i].particleY = 10;
 //  }
-x=200;
+//lines[3].tpos.y
+//x=200;
+x = parseInt(lines[3].tpos.y);
 //  ps = new ParticleSystem(new PVector(width/2, height/2), x);
 
   ps.addParticle();

@@ -45,7 +45,7 @@ println(x);
 //  particleY = 200; 
 //  }
     fill(360,100,100,lifespan/2);
-    ellipse(location.x+x,location.y,bloodRadius,bloodRadius);
+    ellipse(location.x,location.y-x/5,bloodRadius,bloodRadius);
   }
   
   // Is the particle still useful?

@@ -8,7 +8,7 @@ class ParticleSystem {
 
   ParticleSystem(PVector location, int x) {
     origin = location.get();
-    x = 200;
+//    x ;
     particles = new ArrayList<Particle>();
   }
 
@@ -20,7 +20,7 @@ class ParticleSystem {
     for (int i = particles.size()-1; i >= 0; i--) {
       Particle p = particles.get(i);
       p.run();
-      if (p.isDead() || p.location.x<100) {
+      if (p.isDead() || p.location.y>height/2+x) {
         particles.remove(i);
       }
     }
