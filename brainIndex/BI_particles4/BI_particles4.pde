@@ -248,14 +248,16 @@ void floatPrep() {
   for (int i = 0; i< screenCount; i++) {
     if (lines[i] != null) {
       int leftScreen = width/2-(screenWidth*screenCount)/2;
-
-      float screenX = map(i, 0, screenCount, width/2-img.width/2+screenWidth/2,width/2+img.width/2-screenWidth/2); 
+int rightScreen = width/2+(screenWidth*screenCount)/2;
+//      int rightScreen = width/2+img.width/2-screenWidth/2;
+// width/2-img.width/2+screenWidth/2
+      float screenX = map(i, 0, screenCount,leftScreen,rightScreen); 
       lines[i].opacity.x = 255;  // Apply transparency without changing color
       lines[i].topacity.x=255;
 
-      lines[i].imgPos.x = screenWidth;
-      lines[i].timgPos.x = screenWidth;
-      lines[i].timgPos.y = screenHeight;
+      lines[i].imgPos.x = screenWidth*2;
+      lines[i].timgPos.x = screenWidth*2;
+      lines[i].timgPos.y = screenHeight*2;
 
       lines[i].cx = screenX;
       lines[i].cy = 0; 
@@ -263,9 +265,9 @@ void floatPrep() {
 
       lines[i].tpos.x = 0;
 
-      //    image(newImages[index], pos.x, pos.y, imgPos.x, imgPos.y);
-      lines[i].timgPos.x = 0;
-      lines[i].timgPos.y = 0;
+//    image(newImages[index], pos.x, pos.y, imgPos.x, imgPos.y);
+//      lines[i].timgPos.x = 0;
+//      lines[i].timgPos.y = 0;
     }
   }
 }
