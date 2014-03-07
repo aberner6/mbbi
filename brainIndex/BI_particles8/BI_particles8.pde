@@ -226,11 +226,10 @@ void draw() {
         textSize(big);
         text(pieces[sceneIndex], width/2-screenWidth*screenCount/2, lines[0].pos.y, screenWidth*screenCount, screenHeight);
       }
-      if (sceneIndex==3) {
+      if (sceneIndex>=3 && sceneIndex<=12) {
         textSize(medium);
         //where to walk
-        text(pieces[sceneIndex], width/2-screenWidth*screenCount/2, lines[0].pos.y, screenWidth*sceneIndex, screenHeight);
-        lines[sceneIndex].text = pieces[sceneIndex+1];
+        text(pieces[3], width/2-screenWidth*screenCount/2, lines[0].pos.y, screenWidth*3, screenHeight);
       }
     }
 
@@ -238,6 +237,7 @@ void draw() {
       smallText();
     }
   }
+  println (sceneIndex+"sceneIndex");
 }
 void mouseClicked() {
   sceneIndex += 1; 
@@ -252,14 +252,82 @@ void newScene() {
     if (sceneIndex == 3) {
       //where to walk, where to walk, where to walk
       lines[i].tpos.y = 0;
+      lines[3].tpos.y = height/5;
+    }
+    if (sceneIndex==4) {
+      lines[4].tpos.y = height/5;
     }
   }
 }
 void smallText() {
-  textSize(14);
-  lines[sceneIndex].tpos.y = height/5;
-  lines[sceneIndex].text = pieces[sceneIndex+1];
-  lines[sceneIndex].textWidth = screenWidth;
+  textSize(18);
+  if (sceneIndex==3) {
+    lines[3].text = pieces[4];
+    lines[3].textWidth = screenWidth;
+  }
+  if (sceneIndex==4) {
+    lines[3].text = pieces[4];
+    lines[4].text = pieces[4];
+    //    lines[3].textWidth = screenWidth;
+    lines[4].textWidth = screenWidth;
+  }
+  if (sceneIndex==5) {
+    lines[3].text = pieces[4];
+    lines[4].text = pieces[4];
+    lines[5].text = pieces[5];
+    lines[5].textWidth = screenWidth;
+  }
+  //OPTION 1: WHERE TO WALK: WHERE TO LOOK SCREENS BECOME WHERE TO WALK 
+  //  if (sceneIndex==6) {
+  //    lines[5].text = pieces[5]; //where to walk, waiting at top
+  //    lines[4].text = pieces[5]; //first turns to where to walk, then walks
+  //  }
+  //  if (sceneIndex==7) {
+  //    lines[3].lerpVal = .005;
+  //    lines[4].lerpVal = .009;
+  //    lines[3].tpos.y = 0; 
+  //    lines[4].tpos.y = 0;
+  //
+  //    lines[5].text = pieces[5];
+  //    lines[4].text = pieces[5];
+  //    lines[3].text = pieces[5];
+  //  }
+
+  //OPTION 2: WHERE TO WALK: WHERE TO LOOK SCREENS PERSIST AND NEW ONES BECOME WHERE TO WALK 
+  if (sceneIndex==6) {
+    lines[3].text = pieces[4];
+    lines[4].text = pieces[4];
+    lines[5].text = pieces[5];
+
+    lines[3].lerpVal = .005;
+    lines[4].lerpVal = .009;
+
+    lines[3].tpos.y = height/6; 
+    lines[4].tpos.y = height/6;
+    //    lines[5].text = pieces[5]; //where to walk, waiting at top
+  }
+  //  if (sceneIndex==7) {
+  //    lines[3].text = pieces[4];
+  //    lines[4].text = pieces[4];
+  //    
+  //    lines[5].text = pieces[5]; //where to walk, waiting at top
+  //
+  //  }
+  if (sceneIndex==7) {
+    lines[3].text = pieces[4];
+    lines[4].text = pieces[4];
+    lines[5].text = pieces[5];
+    lines[6].lerpVal = .01;
+    lines[6].tpos.y = height/3;
+  }
+  if (sceneIndex==8) {
+    lines[3].text = pieces[4];
+    lines[4].text = pieces[4];
+    lines[5].text = pieces[5];
+    lines[5].tpos.y = height/3;
+    lines[6].textWidth = screenWidth;
+    lines[6].text = pieces[5];
+  }
 }
 
 void pointillize() {
