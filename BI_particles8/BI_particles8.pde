@@ -328,6 +328,30 @@ void smallText() {
     lines[6].textWidth = screenWidth;
     lines[6].text = pieces[5];
   }
+  if (sceneIndex==9) {
+    lines[3].text = pieces[4];
+    lines[4].text = pieces[4];
+    lines[5].text = pieces[5];
+    lines[6].text = pieces[5];
+    lines[6].text = pieces[5];
+    
+        lines[7].textWidth = screenWidth*2;
+//        lines[8].textWidth = screenWidth;
+    lines[7].text = pieces[6];
+//    lines[8].text = pieces[6];
+  }
+  if (sceneIndex==10) {
+    lines[3].text = pieces[4];
+    lines[4].text = pieces[4];
+    lines[5].text = pieces[5];
+    lines[6].text = pieces[5];
+    lines[6].text = pieces[5];
+    
+        lines[7].textWidth = screenWidth;
+        lines[8].textWidth = screenWidth;
+    lines[7].text = pieces[6];
+    lines[8].text = pieces[6];
+  }
 }
 
 void pointillize() {
