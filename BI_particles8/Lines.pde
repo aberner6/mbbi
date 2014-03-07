@@ -31,7 +31,7 @@ class Line {
 
 
   void update() {
-//    lerpVal;
+    //    lerpVal;
 
     pos.x = lerp(pos.x, tpos.x, lerpVal);//0.1);
     pos.y = lerp(pos.y, tpos.y, lerpVal);//0.1);
@@ -41,12 +41,12 @@ class Line {
     //    float opacity;
     //    PImage img;
     int index;
-int textWidth;
+    int textWidth;
     imgPos.x = lerp(imgPos.x, timgPos.x, lerpVal);
     imgPos.y = lerp(imgPos.y, timgPos.y, lerpVal);
 
-//    posimgPos.x = lerp(posimgPos.x, postimgPos.x, lerpVal);
-//    posimgPos.y = lerp(posimgPos.y, postimgPos.y, lerpVal);
+    //    posimgPos.x = lerp(posimgPos.x, postimgPos.x, lerpVal);
+    //    posimgPos.y = lerp(posimgPos.y, postimgPos.y, lerpVal);
 
 
     backImgPos.y = lerp(backImgPos.y, tbackImgPos.y, lerpVal);
@@ -59,20 +59,16 @@ int textWidth;
 
     pushMatrix();
     translate(cx, cy);
-    //    println(pos.y+"pos.y");
-//    tint(255, opacity.x);  // Apply transparency without changing color
+    //    tint(255, opacity.x);  // Apply transparency without changing color
 
     image(newImages[index], pos.x+screenWidth/2, pos.y+screenHeight/2, imgPos.x, imgPos.y);
     strokeWeight(.5);
     stroke(200);
-//    noFill();
     fill(360, 60);
     rect(pos.x, pos.y, screenWidth, screenHeight);
     fill(0);
-  text(text, pos.x,pos.y,textWidth-4, screenHeight-4);
-//  text(text, pos.x,pos.y,screenWidth-4, screenHeight-4);
-
-//  text("ichiichiichiichiichiichiichi",lines[3].pos.x,lines[3].pos.y,20, 80);
+    text(text, pos.x+5, pos.y, textWidth-4, screenHeight-4);
+    //  text("ichiichiichiichiichiichiichi",lines[3].pos.x,lines[3].pos.y,20, 80);
 
     popMatrix();
   }
