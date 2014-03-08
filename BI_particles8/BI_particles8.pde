@@ -86,13 +86,15 @@ String[] pieces = {
 };
 int textIndex = 0;
 int sceneIndex = 0;
-PFont font;
+PFont fontBig;
+PFont fontMedium;
+PFont fontSmall;
 int fontSize = 12;
 int big = 42;
 int medium = 24;
 
 void setup() {
-  size(1200, 1000);
+  size(1200, 800);
 
   //  size(thiswidth, thisheight+screenHeight);
   ps = new ParticleSystem(new PVector(width/2, height/2), x);
@@ -102,8 +104,11 @@ void setup() {
   //  fill (300);
 
   smooth();
-  font = loadFont("NimbusSanNov-Med-42.vlw");
-  textFont(font);
+  fontBig = loadFont("NimbusSanNov-Med-42.vlw");
+    fontMedium = loadFont("NimbusSanNov-Med-24.vlw");
+  fontSmall = loadFont("NimbusSanNov-Med-18.vlw");
+
+//  textFont(font);
   lines = new Line[screenCount]; 
   parse();
 
@@ -223,11 +228,13 @@ void draw() {
     if (doText) {
       fill(0);
       if (sceneIndex<3) {
-        textSize(big);
+        textFont(fontBig);
+
         text(pieces[sceneIndex], width/2-screenWidth*screenCount/2, lines[0].pos.y, screenWidth*screenCount, screenHeight);
       }
       if (sceneIndex>=3 && sceneIndex<=12) {
-        textSize(medium);
+//        textSize(medium);
+        textFont(fontMedium);
         //where to walk
         text(pieces[3], width/2-screenWidth*screenCount/2, lines[0].pos.y, screenWidth*3, screenHeight);
       }
@@ -260,7 +267,8 @@ void newScene() {
   }
 }
 void smallText() {
-  textSize(18);
+textFont(fontSmall);
+  //  textSize(18);
   if (sceneIndex==3) {
     lines[3].text = pieces[4];
     lines[3].textWidth = screenWidth;
