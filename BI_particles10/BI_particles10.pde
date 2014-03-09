@@ -83,7 +83,9 @@ int wheresOtherX;
 String text;
 String[] pieces = {
   "", "Your brain can predict the future", "In fact, it's making lots of little predictions right now", "By making guesses about what comes next, the brain knows", "where to look", "when to walk", "and how to talk.", "mumble", 
-  "When your brain guesses right,", "you feel like things are running smoothly.","But sometimes the brain guesses wrong","(nobody is perfect)","Scientists call these mistakes 'prediction errors.'"
+  "When your brain guesses right,", "you feel like things are running smoothly.", "But sometimes the brain guesses wrong", "(nobody is perfect)", 
+  "Scientists call these mistakes 'prediction errors.'", 
+  "When the brain registers an error, it adapts to become a better predictor.", "It learns", "Learning involves brain areas responsible for memory, like the hippocampus"
 };
 int textIndex = 0;
 int sceneIndex = 0;
@@ -256,14 +258,76 @@ void draw() {
           lines[i].tpos.y = 0;
         }
       }
-       if (sceneIndex==17) {
+      if (sceneIndex==17) {
         textFont(fontBig); //scientists call these errors
         text(pieces[12], width/2-screenWidth*screenCount/2+screenWidth, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth*2, screenHeight);
         for (int i = 0; i<screenCount; i++) { 
-//          lines[i].lerpVal = .04;
-          lines[i].tpos.y = width/3;
+          lines[i].tpos.y = height/3;
         }
       }
+      if (sceneIndex==18) {
+        textFont(fontBig); //the brain adapts
+        text(pieces[13], width/2-screenWidth*screenCount/2+screenWidth/4, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth/4, screenHeight);
+        for (int i = 0; i<screenCount; i++) { 
+          lines[i].tpos.y = height/3+(random(0, 1))*20;
+        }
+      }
+      if (sceneIndex==19) {
+        textFont(fontBig); //the brain adapts
+        text(pieces[13], width/2-screenWidth*screenCount/2+screenWidth/4, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth/4, screenHeight);
+        for (int i = 0; i<screenCount; i++) { 
+          lines[i].tpos.y = height/3;
+        }
+      }
+      if (sceneIndex==20) {
+        textFont(fontMedium); //it learns
+        text(pieces[14], lines[0].cx+screenWidth/10, lines[0].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
+        lines[1].tpos.y = height/4;
+        lines[2].tpos.y = height/5;
+        lines[3].tpos.y = height/6;
+      }
+      if (sceneIndex==21) {
+        textFont(fontMedium); //it learns
+        text(pieces[14], lines[0].cx+screenWidth/10, lines[0].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
+        lines[4].tpos.y = height/6;
+        lines[5].tpos.y = height/5;
+        lines[6].tpos.y = height/4;
+        lines[7].tpos.y = height/3; //change this to be more out of whack? or works?
+        lines[8].tpos.y = height/2;
+      }
+      if (sceneIndex==22) {
+        textFont(fontMedium); //it learns
+        text(pieces[14], lines[0].cx+screenWidth/10, lines[0].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
+        lines[1].tpos.y = height/3;
+        lines[2].tpos.y = height/3;
+        lines[3].tpos.y = height/3;
+      }
+      if (sceneIndex==23) {
+        textFont(fontMedium); //it learns
+        text(pieces[14], lines[0].cx+screenWidth/10, lines[0].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
+        for (int j = 4; j<9; j++) {
+          lines[j].tpos.y = height/3;
+        }
+      }
+      if (sceneIndex>=24 && sceneIndex<=28) { //involves brain areas like the hippocampus
+        textFont(fontMedium);
+        text(pieces[15], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+      }
+      if (sceneIndex==25) {
+        lines[5].imgPos.x = 0;
+        lines[5].timgPos.x = screenWidth*2;
+        lines[5].timgPos.y = screenHeight;
+      }
+      if (sceneIndex==26) {
+        //     image(newImages[index], pos.x+screenWidth/2, pos.y+screenHeight/2, imgPos.x, imgPos.y);
+        lines[5].timgPos.x = screenWidth;
+      }
+      //        for (int i = 0; i< screenCount; i++) {
+      //    lines[i].imgPos.x = 0;
+      //    lines[i].timgPos.x = screenWidth;
+      //    lines[i].timgPos.y = screenHeight;
+      //  }
+      //make hippo image (other one for now) at hippocampus rect
     }
 
     if (smallText) {

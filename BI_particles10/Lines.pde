@@ -61,7 +61,7 @@ class Line {
     translate(cx, cy);
     //    tint(255, opacity.x);  // Apply transparency without changing color
 
-    image(newImages[index], pos.x+screenWidth/2, pos.y+screenHeight/2, imgPos.x, imgPos.y);
+    image(newImages[index], pos.x+screenWidth/2+2, pos.y+screenHeight/2, imgPos.x, imgPos.y);
     strokeWeight(.5);
     stroke(200);
     fill(360, 60);
