@@ -311,9 +311,10 @@ void draw() {
       }
       if (sceneIndex>=24 && sceneIndex<=28) { //involves brain areas like the hippocampus
         textFont(fontMedium);
-        text(pieces[15], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        text(pieces[15], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5+13, screenWidth*3-10, screenHeight-10);
       }
       if (sceneIndex==25) {
+        lines[5].index = 1; //hippo
         lines[5].imgPos.x = 0;
         lines[5].timgPos.x = screenWidth*2;
         lines[5].timgPos.y = screenHeight;
