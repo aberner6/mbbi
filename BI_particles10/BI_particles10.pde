@@ -85,7 +85,7 @@ String[] pieces = {
   "", "Your brain can predict the future", "In fact, it's making lots of little predictions right now", "By making guesses about what comes next, the brain knows", "where to look", "when to walk", "and how to talk.", "mumble", 
   "When your brain guesses right,", "you feel like things are running smoothly.", "But sometimes the brain guesses wrong", "(nobody is perfect)", 
   "Scientists call these mistakes 'prediction errors.'", 
-  "When the brain registers an error, it adapts to become a better predictor.", "It learns", "Learning involves brain areas responsible for memory, like the hippocampus"
+  "When the brain registers an error, it adapts to become a better predictor.", "It learns", "Learning involves brain areas responsible for memory", "the hippocampus", "and brain areas responsible for motivation and reward", "the striatum", "These areas are active both when we're forming memories and when we're making decisions based on those memories."
 };
 int textIndex = 0;
 int sceneIndex = 0;
@@ -259,34 +259,36 @@ void draw() {
         }
       }
       if (sceneIndex==17) {
-        textFont(fontBig); //scientists call these errors
-        text(pieces[12], width/2-screenWidth*screenCount/2+screenWidth, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth*2, screenHeight);
         for (int i = 0; i<screenCount; i++) { 
           lines[i].tpos.y = height/3;
         }
       }
       if (sceneIndex==18) {
+        textFont(fontBig); //scientists call these errors
+        text(pieces[12], width/2-screenWidth*screenCount/2+screenWidth, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth*2, screenHeight);
+      }
+      if (sceneIndex==19) {
         textFont(fontBig); //the brain adapts
         text(pieces[13], width/2-screenWidth*screenCount/2+screenWidth/4, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth/4, screenHeight);
         for (int i = 0; i<screenCount; i++) { 
           lines[i].tpos.y = height/3+(random(0, 1))*20;
         }
       }
-      if (sceneIndex==19) {
+      if (sceneIndex==20) {
         textFont(fontBig); //the brain adapts
         text(pieces[13], width/2-screenWidth*screenCount/2+screenWidth/4, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth/4, screenHeight);
         for (int i = 0; i<screenCount; i++) { 
           lines[i].tpos.y = height/3;
         }
       }
-      if (sceneIndex==20) {
+      if (sceneIndex==21) {
         textFont(fontMedium); //it learns
         text(pieces[14], lines[0].cx+screenWidth/10, lines[0].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
         lines[1].tpos.y = height/4;
         lines[2].tpos.y = height/5;
         lines[3].tpos.y = height/6;
       }
-      if (sceneIndex==21) {
+      if (sceneIndex==22) {
         textFont(fontMedium); //it learns
         text(pieces[14], lines[0].cx+screenWidth/10, lines[0].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
         lines[4].tpos.y = height/6;
@@ -295,40 +297,76 @@ void draw() {
         lines[7].tpos.y = height/3; //change this to be more out of whack? or works?
         lines[8].tpos.y = height/2;
       }
-      if (sceneIndex==22) {
-        textFont(fontMedium); //it learns
-        text(pieces[14], lines[0].cx+screenWidth/10, lines[0].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
-        lines[1].tpos.y = height/3;
-        lines[2].tpos.y = height/3;
-        lines[3].tpos.y = height/3;
-      }
       if (sceneIndex==23) {
         textFont(fontMedium); //it learns
         text(pieces[14], lines[0].cx+screenWidth/10, lines[0].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
+        lines[0].tpos.y = height/2;
+        lines[1].tpos.y = height/2;
+        lines[2].tpos.y = height/2;
+        lines[3].tpos.y = height/2;
+      }
+      if (sceneIndex==24) {
+        textFont(fontMedium); //it learns
+        text(pieces[14], lines[0].cx+screenWidth/10, lines[0].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
         for (int j = 4; j<9; j++) {
-          lines[j].tpos.y = height/3;
+          lines[j].tpos.y = height/2;
         }
       }
-      if (sceneIndex>=24 && sceneIndex<=28) { //involves brain areas like the hippocampus
+      if (sceneIndex>=25 && sceneIndex<28) { //involves brain areas like the hippocampus
         textFont(fontMedium);
-        text(pieces[15], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5+13, screenWidth*3-10, screenHeight-10);
-      }
-      if (sceneIndex==25) {
-        lines[5].index = 1; //hippo
-        lines[5].imgPos.x = 0;
-        lines[5].timgPos.x = screenWidth*2;
-        lines[5].timgPos.y = screenHeight;
+        lines[0].tpos.y = height/2;
+        lines[1].tpos.y = height/2;
+        lines[2].tpos.y = height/2;
+        text(pieces[15], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
       }
       if (sceneIndex==26) {
-        //     image(newImages[index], pos.x+screenWidth/2, pos.y+screenHeight/2, imgPos.x, imgPos.y);
-        lines[5].timgPos.x = screenWidth;
+        textFont(fontSmall);
+        lines[3].index = 1; //hippo
+        lines[3].imgPos.x = 0;
+        lines[3].tpos.y = height/3;
+        //        lines[3].text = pieces[16];
+        text(pieces[16], lines[3].cx+screenWidth/10, lines[3].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);        
+        lines[3].timgPos.x = screenWidth*2-10;
+        lines[3].timgPos.y = screenHeight;
       }
-      //        for (int i = 0; i< screenCount; i++) {
-      //    lines[i].imgPos.x = 0;
-      //    lines[i].timgPos.x = screenWidth;
-      //    lines[i].timgPos.y = screenHeight;
-      //  }
-      //make hippo image (other one for now) at hippocampus rect
+      if (sceneIndex==27) {
+        lines[3].timgPos.x = screenWidth;
+      }
+      if (sceneIndex==28) {
+        textFont(fontMedium);
+        text(pieces[17], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        textFont(fontSmall);
+        lines[4].index = 2; //hippo
+        lines[4].imgPos.x = 0;
+        lines[4].tpos.y = height/3;
+        //        lines[3].text = pieces[16];
+        text(pieces[18], lines[4].cx+screenWidth/10, lines[4].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);        
+        lines[4].timgPos.x = screenWidth*2-10;
+        lines[4].timgPos.y = screenHeight;
+      }
+      if (sceneIndex==29) {
+        textFont(fontMedium);
+        text(pieces[17], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+//        textFont(fontSmall);        
+//            text(pieces[18], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        lines[4].timgPos.x = screenWidth;
+      }
+      
+      if (sceneIndex==30){
+               lines[4].timgPos.x = 0;
+        lines[3].timgPos.x =0;
+        lines[4].timgPos.y = 0;
+        lines[3].timgPos.y = 0;
+
+        lines[3].tpos.y = height/2;
+        lines[4].tpos.y = height/2;
+      }
+      if (sceneIndex==31){
+        textFont(fontMedium); //the brain adapts
+        text(pieces[19], width/2-screenWidth*screenCount/2+screenWidth/4, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth/4, screenHeight);       
+        //These areas are active both when we're forming memories and when we're making decisions based on those memories. 
+      }
+      
     }
 
     if (smallText) {
