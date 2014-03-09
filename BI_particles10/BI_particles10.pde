@@ -82,7 +82,8 @@ int wheresOtherX;
 
 String text;
 String[] pieces = {
-  "", "Your brain can predict the future", "In fact, it's making lots of little predictions right now", "By making guesses about what comes next, the brain knows", "where to look", "when to walk", "and how to talk.", "mumble"
+  "", "Your brain can predict the future", "In fact, it's making lots of little predictions right now", "By making guesses about what comes next, the brain knows", "where to look", "when to walk", "and how to talk.", "mumble", 
+  "When your brain guesses right,", "you feel like things are running smoothly.","But sometimes the brain guesses wrong","(nobody is perfect)","Scientists call these mistakes 'prediction errors.'"
 };
 int textIndex = 0;
 int sceneIndex = 0;
@@ -229,15 +230,39 @@ void draw() {
       fill(0);
       if (sceneIndex<3) {
         textFont(fontBig);
-        //    text(text, pos.x+screenWidth/10, pos.y+screenHeight/3, textWidth-10, screenHeight);
-
         text(pieces[sceneIndex], width/2-screenWidth*screenCount/2+screenWidth, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth*2, screenHeight);
       }
-      if (sceneIndex>=3 && sceneIndex<=20) {
-        //        textSize(medium);
+      if (sceneIndex>=3 && sceneIndex<=11) {
         textFont(fontMedium);
-        //where to walk
         text(pieces[3], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+      }
+      if (sceneIndex==13) { //when your brain guesses right,
+        textFont(fontBig);
+        text(pieces[8], width/2-screenWidth*screenCount/2+screenWidth/2, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth, screenHeight);
+      }
+      if (sceneIndex==14) {
+        textFont(fontBig); //you feel like things are running smoothly
+        text(pieces[9], width/2-screenWidth*screenCount/2+screenWidth, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth*2, screenHeight);
+        for (int i = 0; i<screenCount; i++) { 
+          lines[i].lerpVal = .04;
+          lines[i].tpos.y = height/2;
+        }
+      }
+      if (sceneIndex==15) {
+        textFont(fontBig); //but sometimes it messes up
+        text(pieces[10], width/2-screenWidth*screenCount/2+screenWidth, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth*2, screenHeight);
+        for (int i = 0; i<screenCount; i++) { 
+          lines[i].lerpVal = .04;
+          lines[i].tpos.y = 0;
+        }
+      }
+       if (sceneIndex==17) {
+        textFont(fontBig); //scientists call these errors
+        text(pieces[12], width/2-screenWidth*screenCount/2+screenWidth, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth*2, screenHeight);
+        for (int i = 0; i<screenCount; i++) { 
+//          lines[i].lerpVal = .04;
+          lines[i].tpos.y = width/3;
+        }
       }
     }
 
@@ -258,7 +283,6 @@ void newScene() {
       lines[i].tpos.y = height/3;
     }
     if (sceneIndex == 3) {
-      //where to walk, where to walk, where to walk
       lines[i].tpos.y = 0;
     }
   }
@@ -281,7 +305,7 @@ void smallText() {
   }
   if (sceneIndex==7) {
     lines[8].text = pieces[4];
-    lines[4].text = pieces[4]; 
+    lines[4].text = pieces[4];
   }
 
   if (sceneIndex==8) {
@@ -293,8 +317,16 @@ void smallText() {
     lines[7].text = pieces[5];
     lines[6].lerpVal = .009;
     lines[7].lerpVal = .006;
-    if (lines[6].pos.y>height/3-200) { //so they walk like feet together
+    if (lines[6].pos.y>height/3-300) { //so they walk like feet together
       lines[7].lerpVal = .013;
+    }
+    if (lines[7].pos.y>height/3-200) { //so they walk like feet together
+      lines[6].lerpVal = .013;
+      lines[7].lerpVal = .006;
+    }
+    if (lines[6].pos.y>height/3-100) { //so they walk like feet together
+      lines[7].lerpVal = .013;
+      //              lines[7].lerpVal = .006;
     }
 
     lines[6].tpos.y = height/3;
@@ -305,7 +337,7 @@ void smallText() {
     lines[8].tpos.y = 0;
   }
   if (sceneIndex==11) {
-     lines[8].text = pieces[6]; //and how to talk
+    lines[8].text = pieces[6]; //and how to talk
     lines[6].lerpVal = .03;
     lines[7].lerpVal = .03;
     lines[7].text = pieces[7]; //mumble
@@ -320,7 +352,16 @@ void smallText() {
     lines[4].tpos.y = 0;
     lines[3].tpos.y = 0;
   }
-
+  if (sceneIndex==15) {
+    lines[4].tpos.y = height/2-100;
+    lines[4].text = pieces[11];
+    lines[4].textWidth = screenWidth;
+  }
+  if (sceneIndex==16) {
+    lines[4].tpos.y = height/2-100;
+    lines[4].text = pieces[11]; //nobodys perfect
+    lines[4].textWidth = screenWidth;
+  }
 }
 
 void pointillize() {
