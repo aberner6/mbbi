@@ -17,7 +17,7 @@ class Line {
 
   PVector imgPos = new PVector();
   PVector timgPos = new PVector();
-  //  float opacity;
+//  float opacity = 100;
 
   PVector backImgPos = new PVector();
   PVector tbackImgPos = new PVector();
@@ -59,7 +59,7 @@ class Line {
 
     pushMatrix();
     translate(cx, cy);
-    //    tint(255, opacity.x);  // Apply transparency without changing color
+        tint(360, opacity.x);  // Apply transparency without changing color
 
     image(newImages[index], pos.x+screenWidth/2+2, pos.y+screenHeight/2, imgPos.x, imgPos.y);
     strokeWeight(.5);

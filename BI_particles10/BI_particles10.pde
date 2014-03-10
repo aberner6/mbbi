@@ -85,7 +85,12 @@ String[] pieces = {
   "", "Your brain can predict the future", "In fact, it's making lots of little predictions right now", "By making guesses about what comes next, the brain knows", "where to look", "when to walk", "and how to talk.", "mumble", 
   "When your brain guesses right,", "you feel like things are running smoothly.", "But sometimes the brain guesses wrong", "(nobody is perfect)", 
   "Scientists call these mistakes 'prediction errors.'", 
-  "When the brain registers an error, it adapts to become a better predictor.", "It learns", "Learning involves brain areas responsible for memory", "the hippocampus", "and brain areas responsible for motivation and reward", "the striatum", "These areas are active both when we're forming memories and when we're making decisions based on those memories."
+  "When the brain registers an error, it adapts to become a better predictor.", "It learns", "Learning involves brain areas responsible for memory", "the hippocampus", "and brain areas responsible for motivation and reward", "the striatum", 
+  "These areas are active both when we're forming memories", "and when we're making decisions based on those memories.", "but...", "How do we know they're active?", "Some researchers measure brain activity through functional magnetic resonance imaging, or fMRI", 
+  "fMRI uses a giant magnet to track blood flow in the brain", 
+  "Blood flows to areas of expected brain activity to provide busy neurons with fuel.", 
+  "For example, when the brain expects you to see something, blood flows to the visual cortex.", 
+  "So by watching blood flow, scientists can tell which brain areas are hard at work."
 };
 int textIndex = 0;
 int sceneIndex = 0;
@@ -347,26 +352,109 @@ void draw() {
       if (sceneIndex==29) {
         textFont(fontMedium);
         text(pieces[17], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
-//        textFont(fontSmall);        
-//            text(pieces[18], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        //        textFont(fontSmall);        
+        //            text(pieces[18], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
         lines[4].timgPos.x = screenWidth;
       }
-      
-      if (sceneIndex==30){
-               lines[4].timgPos.x = 0;
+
+      if (sceneIndex==30) {
+        textFont(fontMedium); //learning new things
+        text(pieces[19], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        //These areas are active both when we're forming memories and when we're making decisions based on those memories.
+      }
+      if (sceneIndex==31) {
+        textFont(fontMedium); //and making decisions
+        text(pieces[19], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+
+        text(pieces[20], lines[6].cx, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        //These areas are active both when we're forming memories and when we're making decisions based on those memories.
+      }
+      if (sceneIndex==32) {
+        textFont(fontMedium); //learning and deciding
+        text(pieces[19], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        text(pieces[20], lines[6].cx, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        //These areas are active both when we're forming memories and when we're making decisions based on those memories.
+        lines[3].topacity.x = 50;
+        lines[4].topacity.x = 50;
+      }
+      if (sceneIndex==33) {
+        textFont(fontMedium); //learning and deciding
+        text(pieces[19], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        lines[3].topacity.x = 255;
+        lines[4].topacity.x = 255;
+        text(pieces[20], lines[6].cx, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+      }     
+      if (sceneIndex==34) {
+        textFont(fontMedium); //learning and deciding
+        text(pieces[19], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        text(pieces[20], lines[6].cx, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        //These areas are active both when we're forming memories and when we're making decisions based on those memories.
+        lines[3].topacity.x = 50;
+        lines[4].topacity.x = 50;
+      }
+      if (sceneIndex==35) {
+        textFont(fontMedium); //learning and deciding
+        text(pieces[19], width/2-screenWidth*screenCount/2+10, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        lines[3].topacity.x = 255;
+        lines[4].topacity.x = 255;
+        text(pieces[20], lines[6].cx, lines[0].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+      }  
+      if (sceneIndex==36) {
+        textFont(fontSmall); //learning and deciding
+        text(pieces[21], lines[5].cx+screenWidth/10, lines[5].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
+        lines[5].tpos.y = height/5;
+      }   
+      if (sceneIndex==37) {
+        textFont(fontSmall); //learning and deciding
+        text(pieces[22], lines[8].cx+screenWidth/10, lines[8].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
+        lines[8].tpos.y = height/6;
+      }  
+      if (sceneIndex==38) {
+        //      Some researchers measure brain activity through functional magnetic resonance imaging, or fMRI
+        //to get images to disappear
+        lines[4].timgPos.x = 0;
         lines[3].timgPos.x =0;
         lines[4].timgPos.y = 0;
         lines[3].timgPos.y = 0;
+        lines[3].tpos.y = height/1.4;
+        lines[4].tpos.y = height/1.4;
+        textFont(fontSmall);
+        //  "fMRI uses a giant magnet to track blood flow in the brain",
+        //WRONG TEXT
+        text(pieces[23], lines[8].cx+screenWidth/10, lines[8].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
+      }   
+      if (sceneIndex==39) {
+        lines[8].tpos.y = height/1.4;
+        lines[0].tpos.y = height/1.4;
+        lines[1].tpos.y = height/1.4;
+        lines[2].tpos.y = height/1.4;
 
-        lines[3].tpos.y = height/2;
-        lines[4].tpos.y = height/2;
+        noFill();
+        smooth();
+        strokeWeight(2);
+        stroke(100, 20);
+        arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, -PI/2, PI*1.5/3);
+        arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, PI / 2, 3 * PI / 2);
+        //      }
+        //      if (sceneIndex==40) {
+        textFont(fontSmall);
+        //"fMRI uses a giant magnet to track blood flow in the brain",
+        text(pieces[24], lines[6].cx+screenWidth/10, lines[6].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
       }
-      if (sceneIndex==31){
-        textFont(fontMedium); //the brain adapts
-        text(pieces[19], width/2-screenWidth*screenCount/2+screenWidth/4, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth/4, screenHeight);       
-        //These areas are active both when we're forming memories and when we're making decisions based on those memories. 
+      if (sceneIndex==41) {
+        noFill();
+        smooth();
+        strokeWeight(2);
+        stroke(100, 20);
+        arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, -PI/2, PI*1.5/3);
+        arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, PI / 2, 3 * PI / 2);
+        
+        lines[8].tpos.y = height/2;
+        fill(50, 0, 0, 100);
+        ellipse(lines[8].cx+screenWidth/10, lines[8].pos.y, 10, 10);
+        //  For example, when the brain expects you to see something, blood flows to the visual cortex.
+        text(pieces[25], lines[6].cx+screenWidth/10, lines[6].pos.y+screenHeight/5, screenWidth-10, screenHeight-10);
       }
-      
     }
 
     if (smallText) {
