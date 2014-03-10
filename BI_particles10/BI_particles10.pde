@@ -105,7 +105,7 @@ void setup() {
   size(1200, 800);
 
   //  size(thiswidth, thisheight+screenHeight);
-  ps = new ParticleSystem(new PVector(width/2, height/2), x);
+  ps = new ParticleSystem(new PVector(width/2+300, height/2), x);
 
 
   colorMode(HSB, 360, 100, 100, 100);
@@ -221,17 +221,17 @@ void draw() {
 
 
 
-    if (particles) {
-      background(360);
-      image(backgroundTwo, width/2, height/2-140);
-      fill(360);
-      rect(width/2-(screenWidth*screenCount)/2, 0, img.width+screenWidth/2+22, img.height);
-      for (int i = 0; i< screenCount; i++) {
-        lines[i].update();
-        lines[i].render();
-      }   
-      makeParticles();
-    }
+    //    if (particles) {
+    //      background(360);
+    //      image(backgroundTwo, width/2, height/2-140);
+    //      fill(360);
+    //      rect(width/2-(screenWidth*screenCount)/2, 0, img.width+screenWidth/2+22, img.height);
+    //      for (int i = 0; i< screenCount; i++) {
+    //        lines[i].update();
+    //        lines[i].render();
+    //      }   
+    //      makeParticles();
+    //    }
 
     if (doText) {
       fill(0);
@@ -421,13 +421,20 @@ void draw() {
         textFont(fontSmall);
         //  "fMRI uses a giant magnet to track blood flow in the brain",
         //WRONG TEXT
-        text(pieces[23], lines[8].cx+screenWidth/10, lines[8].pos.y+screenHeight/3, screenWidth-10, screenHeight-10);
+        text(pieces[23], lines[6].cx+screenWidth/10, lines[6].pos.y+screenHeight/7, screenWidth*2-10, screenHeight-10);
       }   
       if (sceneIndex==39) {
         lines[8].tpos.y = height/1.4;
-        lines[0].tpos.y = height/1.4;
-        lines[1].tpos.y = height/1.4;
-        lines[2].tpos.y = height/1.4;
+        lines[0].tpos.y =0;
+        lines[1].tpos.y = 0;
+        lines[2].tpos.y = 0;
+        lines[3].tpos.y = 0;
+        lines[4].tpos.y = 0;
+        lines[5].tpos.y = 0;
+
+        //        lines[0].tpos.y = height/1.4;
+        //        lines[1].tpos.y = height/1.4;
+        //        lines[2].tpos.y = height/1.4;
 
         noFill();
         smooth();
@@ -439,21 +446,71 @@ void draw() {
         //      if (sceneIndex==40) {
         textFont(fontSmall);
         //"fMRI uses a giant magnet to track blood flow in the brain",
-        text(pieces[24], lines[6].cx+screenWidth/10, lines[6].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+        text(pieces[24], lines[6].cx+screenWidth/10, lines[6].pos.y+screenHeight/5, screenWidth*2-10, screenHeight-10);
       }
-      if (sceneIndex==41) {
+      if (sceneIndex==40) {
         noFill();
         smooth();
         strokeWeight(2);
         stroke(100, 20);
         arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, -PI/2, PI*1.5/3);
         arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, PI / 2, 3 * PI / 2);
-        
+
         lines[8].tpos.y = height/2;
-        fill(50, 0, 0, 100);
-        ellipse(lines[8].cx+screenWidth/10, lines[8].pos.y, 10, 10);
-        //  For example, when the brain expects you to see something, blood flows to the visual cortex.
-        text(pieces[25], lines[6].cx+screenWidth/10, lines[6].pos.y+screenHeight/5, screenWidth-10, screenHeight-10);
+        text(pieces[25], lines[6].cx+screenWidth/10, lines[6].pos.y+screenHeight/5, screenWidth*2-10, screenHeight-10);
+      }
+      if (sceneIndex==41) {
+        noFill();
+        smooth();
+        strokeWeight(0);
+        stroke(100, 20);
+        arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, -PI/2, PI*1.5/3);
+        arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, PI / 2, 3 * PI / 2);
+        //or disappear?
+        //        arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[3].imgPos.y, -PI/2, PI*1.5/3);
+        //        arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[3].imgPos.y, PI / 2, 3 * PI / 2);
+
+        text(pieces[26], lines[6].cx+screenWidth/10, lines[6].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+      }
+      if (sceneIndex==42) {
+        noFill();
+        smooth();
+        strokeWeight(0);
+        stroke(100, 20);
+        arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, -PI/2, PI*1.5/3);
+        arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, PI / 2, 3 * PI / 2);
+        background(360);
+        fill(360);
+        rect(width/2-(screenWidth*screenCount)/2, 0, img.width+screenWidth/2+22, img.height);
+        image(backgroundTwo, width/2, height/2-140);
+        for (int i = 0; i< screenCount; i++) {
+          lines[i].update();
+          lines[i].render();
+        }   
+        makeParticles();
+      }
+//      if (sceneIndex==43) {
+//        noFill();
+//        smooth();
+//        strokeWeight(0);
+//        stroke(100, 20);
+//        arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, -PI/2, PI*1.5/3);
+//        arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, PI / 2, 3 * PI / 2);
+//        text(pieces[27], lines[6].cx+screenWidth/10, lines[6].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+//      }
+      if (sceneIndex==43) {
+        for (int i = 0; i<lines.length;i++) {
+          lines[i].tpos.y = height/1.1;
+        }
+        noFill();
+        smooth();
+        strokeWeight(0);
+        stroke(100, 20);
+        arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, -PI/2, PI*1.5/3);
+        arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, PI / 2, 3 * PI / 2);
+
+        textFont(fontBig);
+        text(pieces[28], width/2-screenWidth*screenCount/2+screenWidth, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth*2, screenHeight);
       }
     }
 
@@ -576,7 +633,9 @@ void pointillize() {
 }
 
 void makeParticles() {
-  x = passYPos;
+  x = height/3;
+
+  //  x = passYPos;
   ps.addParticle();
   ps.run();
 }
