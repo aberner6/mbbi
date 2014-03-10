@@ -202,6 +202,10 @@ void draw() {
       lines[i].update();
       lines[i].render();
       lines[i].text = pieces[textIndex];
+//      stroke(100,40);
+      strokeWeight(.2);
+          line(lines[i].cx, 0, lines[i].cx, height);
+      line(lines[screenCount-1].cx+screenWidth, 0, lines[screenCount-1].cx+screenWidth, height);
     }
     if (wipe) {
       wipe();
@@ -462,7 +466,7 @@ void draw() {
       if (sceneIndex==41) {
         noFill();
         smooth();
-        strokeWeight(0);
+        strokeWeight(1);
         stroke(100, 20);
         arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, -PI/2, PI*1.5/3);
         arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, PI / 2, 3 * PI / 2);
@@ -475,12 +479,13 @@ void draw() {
       if (sceneIndex==42) {
         noFill();
         smooth();
-        strokeWeight(0);
+        //        strokeWeight(0);
         stroke(100, 20);
         arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, -PI/2, PI*1.5/3);
         arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, PI / 2, 3 * PI / 2);
         background(360);
         fill(360);
+        stroke(0);
         rect(width/2-(screenWidth*screenCount)/2, 0, img.width+screenWidth/2+22, img.height);
         image(backgroundTwo, width/2, height/2-140);
         for (int i = 0; i< screenCount; i++) {
@@ -489,28 +494,30 @@ void draw() {
         }   
         makeParticles();
       }
-//      if (sceneIndex==43) {
-//        noFill();
-//        smooth();
-//        strokeWeight(0);
-//        stroke(100, 20);
-//        arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, -PI/2, PI*1.5/3);
-//        arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, PI / 2, 3 * PI / 2);
-//        text(pieces[27], lines[6].cx+screenWidth/10, lines[6].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
-//      }
+      //      if (sceneIndex==43) {
+      //        noFill();
+      //        smooth();
+      //        strokeWeight(0);
+      //        stroke(100, 20);
+      //        arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, -PI/2, PI*1.5/3);
+      //        arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, PI / 2, 3 * PI / 2);
+      //        text(pieces[27], lines[6].cx+screenWidth/10, lines[6].pos.y+screenHeight/5, screenWidth*3-10, screenHeight-10);
+      //      }
       if (sceneIndex==43) {
         for (int i = 0; i<lines.length;i++) {
-          lines[i].tpos.y = height/1.1;
+          lines[i].tpos.y = height/2+100;
         }
+      }
+      if (sceneIndex==44) {
         noFill();
         smooth();
-        strokeWeight(0);
+        strokeWeight(1);
         stroke(100, 20);
         arc(width/2+140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, -PI/2, PI*1.5/3);
         arc(width/2-140, height/5+40, screenWidth*screenCount/2, lines[8].pos.y+50, PI / 2, 3 * PI / 2);
 
-        textFont(fontBig);
-        text(pieces[28], width/2-screenWidth*screenCount/2+screenWidth, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth*2, screenHeight);
+        textFont(fontMedium);
+        text(pieces[27], width/2-screenWidth*screenCount/2+screenWidth, lines[0].pos.y+screenHeight/5, screenWidth*screenCount-screenWidth*2, screenHeight);
       }
     }
 
@@ -647,7 +654,6 @@ void floatPrep() {
       int rightScreen = width/2+(screenWidth*screenCount)/2;
 
       float screenX = map(i, 0, screenCount, leftScreen, rightScreen); 
-
       lines[i].opacity.x = 255;  // Apply transparency without changing color
       lines[i].topacity.x=255;
 
@@ -656,6 +662,10 @@ void floatPrep() {
       lines[i].tpos.y = 0; //do you get to control this in prep??????
 
       lines[i].tpos.x = 0;
+      
+      stroke(0);
+      strokeWeight(.2);
+
 
       //    image(newImages[index], pos.x, pos.y, imgPos.x, imgPos.y);
       //      lines[i].timgPos.x = 0;
